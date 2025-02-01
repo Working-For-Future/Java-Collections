@@ -1,6 +1,4 @@
-# Java Collections Framework Guide
-
-## List Interface
+# List Interface
 
 ### ArrayList Operations
 
