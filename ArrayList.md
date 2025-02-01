@@ -1,3 +1,5 @@
+# Java Collections Framework Guide
+
 # List Interface
 
 ### ArrayList Operations
@@ -118,32 +120,6 @@ numbers.ensureCapacity(20);
 ```java
 String[] array = list.toArray(new String[0]);
 Object[] objArray = list.toArray();
-```
-
-## LinkedList Operations
-
-### Initialization
-
-```java
-LinkedList<String> linkedList = new LinkedList<>();
-LinkedList<String> linkedList2 = new LinkedList<>(Arrays.asList("A", "B", "C"));
-```
-
-### Specific LinkedList Operations
-
-```java
-linkedList.addFirst("First");     // Add at beginning
-linkedList.addLast("Last");       // Add at end
-linkedList.getFirst();            // Get first element
-linkedList.getLast();             // Get last element
-linkedList.removeFirst();         // Remove first element
-linkedList.removeLast();          // Remove last element
-linkedList.peek();                // Retrieve but don't remove first element
-linkedList.peekFirst();           // Same as peek()
-linkedList.peekLast();           // Retrieve but don't remove last element
-linkedList.poll();               // Retrieve and remove first element
-linkedList.pollFirst();          // Same as poll()
-linkedList.pollLast();           // Retrieve and remove last element
 ```
 
 ## Stack Operations
