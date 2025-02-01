@@ -72,7 +72,50 @@ Collections.copy(list2,list1)                  // Copy elements from list1 to li
 Collections.shuffle(list);                    // Shuffle elements
 ```
 
-7. Converting to Array
+7. TrimtoSize and ensureCapacity
+
+```java
+// Note: These methods are specifically for ArrayList and not available in the general List interface.
+
+// Reduces internal array capacity to match current size
+// Useful for memory optimization
+// Should be used when you know no more elements will be added
+
+ArrayList<String> list = new ArrayList<>();
+
+// Add elements
+list.add("A");
+list.add("B");
+list.add("C");
+// At this point, the ArrayList has capacity 10 but size 3
+System.out.println("Size before trimToSize: " + list.size()); // Prints: 3
+
+// trimToSize() reduces the capacity to match current size
+list.trimToSize();
+// Now capacity is reduced to 3 to match the size
+
+
+// Increases capacity to at least the specified value
+// Useful when you know you'll add many elements
+// Helps avoid multiple internal resizing operations
+// Can improve performance when adding large number of elements
+
+ // Initialize a new ArrayList
+   ArrayList<Integer> numbers = new ArrayList<>();
+
+// ensureCapacity guarantees that the ArrayList can hold
+// at least the specified number of elements without resizing
+numbers.ensureCapacity(20);
+
+// Now you can add up to 20 elements without any internal resizing
+ for(int i = 0; i < 15; i++) {
+  numbers.add(i);}
+
+// The ArrayList won't need to resize during these additions
+// because we ensured a capacity of 2
+```
+
+8. Converting to Array
 
 ```java
 String[] array = list.toArray(new String[0]);
