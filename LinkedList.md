@@ -1,6 +1,4 @@
-# Java Collections Framework Guide
-
-## LinkedList Operations
+## LinkedList Operations Guide
 
 ### Initialization
 
