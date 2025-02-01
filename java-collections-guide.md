@@ -67,7 +67,7 @@ Collections.reverse(list);                    // Reverse list order
 6. Copying and shuffle
 
 ```java
-List<String> list = new ArrayList<>(list);     // Create copy of equal size as list1
+List<String> list2 = new ArrayList<>(list);     // Create copy of equal size as list1
 Collections.copy(list2,list1)                  // Copy elements from list1 to list2
 Collections.shuffle(list);                    // Shuffle elements
 ```
