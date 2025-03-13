@@ -35,7 +35,7 @@ int size = list.size();           // Get size of list
 boolean isEmpty = list.isEmpty(); // Check if list is empty
 ```
 
-3. Modifying Elements
+3. Setting at Index and Removing Elements
 
 ```java
 list.set(1, "New Element");       // Replace element at index
