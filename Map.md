@@ -130,27 +130,38 @@ public class InventoryExample {
     public static void main(String[] args) {
         // Create a product inventory with prices
         Map<String, Double> inventory = new HashMap<>();
-        
+
         // Add products with prices
         inventory.put("Laptop", 999.99);
         inventory.put("Smartphone", 699.99);
         inventory.put("Headphones", 149.99);
-        
+
         // Don't update price if product already exists
         inventory.putIfAbsent("Laptop", 899.99); // Won't change existing price
-        System.out.println("Laptop price: $" + inventory.get("Laptop")); // Still 999.99
-        
+        System.out.println("Laptop price: $" + inventory.get("Laptop")); 
+        // Output: Laptop price: $999.99
+
         // Add seasonal products
         Map<String, Double> holidayItems = new HashMap<>();
         holidayItems.put("Smart Speaker", 79.99);
         holidayItems.put("Fitness Tracker", 89.99);
-        
+
         // Add all seasonal products to main inventory
         inventory.putAll(holidayItems);
-        
+
         System.out.println("Complete inventory:");
-        inventory.forEach((product, price) -> 
+        // Output: Complete inventory:
+        
+        inventory.forEach((product, price) ->
             System.out.println(product + ": $" + price));
+        /*
+         Output:
+         Laptop: $999.99
+         Smartphone: $699.99
+         Headphones: $149.99
+         Smart Speaker: $79.99
+         Fitness Tracker: $89.99
+        */
     }
 }
 ```
@@ -188,11 +199,13 @@ public class UserPreferences {
         
         // Retrieve known setting
         String theme = userSettings.get("theme");
-        System.out.println("Current theme: " + theme);
+        System.out.println("Current theme: " + theme); 
+        // Output: Current theme: dark
         
         // Retrieve with default for potentially missing setting
         String language = userSettings.getOrDefault("language", "english");
-        System.out.println("Language: " + language);
+        System.out.println("Language: " + language); 
+        // Output: Language: english
         
         // Check if specific settings exist
         if (userSettings.containsKey("notifications")) {
@@ -200,17 +213,21 @@ public class UserPreferences {
         } else {
             System.out.println("Notification setting doesn't exist");
         }
+        // Output: Notification setting doesn't exist
         
         // Check if specific value exists
         if (userSettings.containsValue("dark")) {
             System.out.println("Someone is using dark theme");
         }
+        // Output: Someone is using dark theme
         
         // Get number of settings
         System.out.println("Number of settings: " + userSettings.size());
+        // Output: Number of settings: 2
         
         // Check if any settings exist
         System.out.println("Has settings: " + !userSettings.isEmpty());
+        // Output: Has settings: true
     }
 }
 ```
@@ -241,24 +258,31 @@ public class ShoppingCartExample {
         cart.put("Notebook", 1);
         
         System.out.println("Initial cart: " + cart);
+        // Output (order may vary by runtime):
+        // Initial cart: {Book=2, Pen=5, Notebook=1}
         
         // Remove an item completely
         Integer removedQuantity = cart.remove("Pen");
         System.out.println("Removed " + removedQuantity + " pens from cart");
+        // Output: Removed 5 pens from cart
         
         // Try to remove item only if it has a specific quantity
         boolean removed = cart.remove("Book", 3);
-        System.out.println("Removed books? " + removed); // false, since quantity was 2
+        System.out.println("Removed books? " + removed);
+        // Output: Removed books? false
         
         // Try again with correct quantity
         removed = cart.remove("Book", 2);
-        System.out.println("Removed books? " + removed); // true
+        System.out.println("Removed books? " + removed);
+        // Output: Removed books? true
         
         System.out.println("Updated cart: " + cart);
+        // Output (order may vary): Updated cart: {Notebook=1}
         
         // Clear the cart completely (checkout)
         cart.clear();
         System.out.println("After checkout, cart is empty: " + cart.isEmpty());
+        // Output: After checkout, cart is empty: true
     }
 }
 ```
@@ -283,9 +307,29 @@ public class WordFrequencyCounter {
         }
         
         System.out.println("Word frequency analysis:");
+        // Output (order may vary):
+        // Word frequency analysis:
+        
         for (Map.Entry<String, Integer> entry : wordFrequency.entrySet()) {
             System.out.println(entry.getKey() + ": " + entry.getValue() + " occurrences");
         }
+        /* 
+         Possible output lines (order not guaranteed):
+         to: 3 occurrences
+         be: 2 occurrences
+         or: 1 occurrences
+         not: 1 occurrences
+         that: 1 occurrences
+         is: 1 occurrences
+         the: 2 occurrences
+         question: 1 occurrences
+         whether: 1 occurrences
+         tis: 1 occurrences
+         nobler: 1 occurrences
+         in: 1 occurrences
+         mind: 1 occurrences
+         suffer: 1 occurrences
+        */
         
         // Find the most frequent word
         String mostFrequentWord = "";
@@ -300,6 +344,8 @@ public class WordFrequencyCounter {
         
         System.out.println("\nMost frequent word: '" + mostFrequentWord + 
                 "' with " + maxFrequency + " occurrences");
+        // Output: 
+        // Most frequent word: 'to' with 3 occurrences
     }
 }
 ```
@@ -315,7 +361,7 @@ public class SalaryRanking {
         // TreeMap to automatically sort employees by salary (key)
         TreeMap<Double, String> salaryRanking = new TreeMap<>();
         
-        // Add employee salaries (using reverse mapping for sorting)
+        // Add employee salaries (mapping salary -> employee name)
         salaryRanking.put(75000.00, "John");
         salaryRanking.put(85000.00, "Alice");
         salaryRanking.put(65000.00, "Bob");
@@ -323,24 +369,43 @@ public class SalaryRanking {
         salaryRanking.put(55000.00, "Mike");
         
         System.out.println("Employees sorted by salary (ascending):");
-        salaryRanking.forEach((salary, name) -> 
+        // Output (ascending by key):
+        // Employees sorted by salary (ascending):
+        // Mike: $55000.0
+        // Bob: $65000.0
+        // John: $75000.0
+        // Alice: $85000.0
+        // Sarah: $95000.0
+        
+        salaryRanking.forEach((salary, name) ->
             System.out.println(name + ": $" + salary));
         
         // Get highest and lowest paid employees
         Map.Entry<Double, String> highestPaid = salaryRanking.lastEntry();
         Map.Entry<Double, String> lowestPaid = salaryRanking.firstEntry();
         
-        System.out.println("\nHighest paid: " + highestPaid.getValue() + 
+        System.out.println("\nHighest paid: " + highestPaid.getValue() +
                 " with $" + highestPaid.getKey());
-        System.out.println("Lowest paid: " + lowestPaid.getValue() + 
+        // Output:
+        // Highest paid: Sarah with $95000.0
+        
+        System.out.println("Lowest paid: " + lowestPaid.getValue() +
                 " with $" + lowestPaid.getKey());
+        // Output:
+        // Lowest paid: Mike with $55000.0
         
         // Get salary ranges
         SortedMap<Double, String> midTierSalaries = salaryRanking.subMap(70000.00, 90000.00);
         
         System.out.println("\nMid-tier salary employees ($70k-$90k):");
-        midTierSalaries.forEach((salary, name) -> 
+        // Output:
+        // Mid-tier salary employees ($70k-$90k):
+        
+        midTierSalaries.forEach((salary, name) ->
             System.out.println(name + ": $" + salary));
+        // Output:
+        // John: $75000.0
+        // Alice: $85000.0
     }
 }
 ```
@@ -383,16 +448,26 @@ public class TemperatureTracker {
         TreeMap<Integer, Double> hourlyTemps = new TreeMap<>();
         
         // Record some temperature readings (hour, temperature in Celsius)
-        hourlyTemps.put(8, 18.5);  // 8 AM
-        hourlyTemps.put(12, 24.3); // 12 PM
-        hourlyTemps.put(16, 26.0); // 4 PM
-        hourlyTemps.put(20, 22.5); // 8 PM
-        hourlyTemps.put(0, 16.8);  // 12 AM
-        hourlyTemps.put(4, 15.2);  // 4 AM
+        hourlyTemps.put(8, 18.5);   // 8 AM
+        hourlyTemps.put(12, 24.3);  // 12 PM
+        hourlyTemps.put(16, 26.0);  // 4 PM
+        hourlyTemps.put(20, 22.5);  // 8 PM
+        hourlyTemps.put(0, 16.8);   // 12 AM
+        hourlyTemps.put(4, 15.2);   // 4 AM
         
         System.out.println("Hourly temperature readings:");
-        hourlyTemps.forEach((hour, temp) -> 
+        hourlyTemps.forEach((hour, temp) ->
             System.out.println(hour + ":00 - " + temp + "°C"));
+        /*
+         Possible output (ordered by hour):
+           Hourly temperature readings:
+           0:00 - 16.8°C
+           4:00 - 15.2°C
+           8:00 - 18.5°C
+           12:00 - 24.3°C
+           16:00 - 26.0°C
+           20:00 - 22.5°C
+        */
         
         // Current time is 14 (2 PM) - get nearest readings
         int currentHour = 14;
@@ -402,33 +477,50 @@ public class TemperatureTracker {
         Map.Entry<Integer, Double> nextReading = hourlyTemps.ceilingEntry(currentHour);
         
         System.out.println("\nCurrent time: " + currentHour + ":00");
-        System.out.println("Previous reading: " + previousReading.getKey() + 
+        // Output: Current time: 14:00
+        
+        System.out.println("Previous reading: " + previousReading.getKey() +
                 ":00 - " + previousReading.getValue() + "°C");
-        System.out.println("Next reading: " + nextReading.getKey() + 
+        // Output: Previous reading: 12:00 - 24.3°C
+        
+        System.out.println("Next reading: " + nextReading.getKey() +
                 ":00 - " + nextReading.getValue() + "°C");
+        // Output: Next reading: 16:00 - 26.0°C
         
         // Get morning temperatures (from 6 AM to 12 PM)
         SortedMap<Integer, Double> morningTemps = hourlyTemps.subMap(6, 13);
         
         System.out.println("\nMorning temperatures (6 AM - 12 PM):");
-        morningTemps.forEach((hour, temp) -> 
+        morningTemps.forEach((hour, temp) ->
             System.out.println(hour + ":00 - " + temp + "°C"));
+        /*
+         Possible output:
+           Morning temperatures (6 AM - 12 PM):
+           8:00 - 18.5°C
+           12:00 - 24.3°C
+        */
         
         // Get daily high and low
         Map.Entry<Integer, Double> firstTemp = hourlyTemps.firstEntry();
         Map.Entry<Integer, Double> lastTemp = hourlyTemps.lastEntry();
         
-        System.out.println("\nFirst reading: " + firstTemp.getKey() + 
+        System.out.println("\nFirst reading: " + firstTemp.getKey() +
                 ":00 - " + firstTemp.getValue() + "°C");
-        System.out.println("Last reading: " + lastTemp.getKey() + 
+        // Output: First reading: 0:00 - 16.8°C
+        
+        System.out.println("Last reading: " + lastTemp.getKey() +
                 ":00 - " + lastTemp.getValue() + "°C");
+        // Output: Last reading: 20:00 - 22.5°C
         
         // Get highest and lowest temperature regardless of time
         double max = Collections.max(hourlyTemps.values());
         double min = Collections.min(hourlyTemps.values());
         
         System.out.println("\nHighest temperature: " + max + "°C");
+        // Output: Highest temperature: 26.0°C
+        
         System.out.println("Lowest temperature: " + min + "°C");
+        // Output: Lowest temperature: 15.2°C
     }
 }
 ```
@@ -452,15 +544,33 @@ public class BrowserHistory {
         browserHistory.put("https://www.example.com", "10:40:11");
         
         System.out.println("Browser history (in order of visits):");
-        browserHistory.forEach((url, time) -> 
+        browserHistory.forEach((url, time) ->
             System.out.println(time + " - " + url));
+        /*
+             Possible output (order will match insertion):
+               Browser history (in order of visits):
+               10:30:00 - https://www.google.com
+               10:32:15 - https://www.wikipedia.org
+               10:35:42 - https://www.stackoverflow.com
+               10:37:50 - https://www.github.com
+               10:40:11 - https://www.example.com
+        */
         
         // User visits a previously visited site (moves to end of history in LinkedHashMap)
         browserHistory.put("https://www.wikipedia.org", "10:45:33");
         
         System.out.println("\nUpdated browser history after revisiting Wikipedia:");
-        browserHistory.forEach((url, time) -> 
+        browserHistory.forEach((url, time) ->
             System.out.println(time + " - " + url));
+        /*
+             Possible output:
+               Updated browser history after revisiting Wikipedia:
+               10:30:00 - https://www.google.com
+               10:35:42 - https://www.stackoverflow.com
+               10:37:50 - https://www.github.com
+               10:40:11 - https://www.example.com
+               10:45:33 - https://www.wikipedia.org
+        */
     }
 }
 ```
@@ -483,7 +593,7 @@ Map<String, Integer> lruCache = new LinkedHashMap<>(16, 0.75f, true) {
 public class LRUCacheExample {
     public static void main(String[] args) {
         // Create a simple LRU cache with capacity of 3
-        // LinkedHashMap with access order (true) for LRU behavior
+        // LinkedHashMap with accessOrder=true for LRU behavior
         final int CACHE_SIZE = 3;
         LinkedHashMap<String, String> lruCache = new LinkedHashMap<String, String>(
             CACHE_SIZE, 0.75f, true) {
@@ -498,28 +608,68 @@ public class LRUCacheExample {
         // Add data to cache
         lruCache.put("user:1001", "John Smith");
         printCache(lruCache);
-        
+        /*
+            Possible output:
+              Adding data to cache...
+              
+              Current cache state (in LRU order):
+              user:1001 -> John Smith
+        */
+
         lruCache.put("user:1002", "Jane Doe");
         printCache(lruCache);
-        
+        /*
+            Current cache state (in LRU order):
+            user:1001 -> John Smith
+            user:1002 -> Jane Doe
+        */
+
         lruCache.put("user:1003", "Bob Johnson");
         printCache(lruCache);
-        
-        // Access an entry (will move to end/most recently used)
+        /*
+            Current cache state (in LRU order):
+            user:1001 -> John Smith
+            user:1002 -> Jane Doe
+            user:1003 -> Bob Johnson
+        */
+
+        // Access an entry (will move user:1001 to most recently used)
         System.out.println("\nAccessing user:1001");
         String user = lruCache.get("user:1001");
         System.out.println("Retrieved: " + user);
         printCache(lruCache);
-        
+        /*
+            Output:
+              Accessing user:1001
+              Retrieved: John Smith
+
+              Current cache state (in LRU order):
+              user:1002 -> Jane Doe
+              user:1003 -> Bob Johnson
+              user:1001 -> John Smith
+        */
+
         // Add a new entry - should evict the least recently used (user:1002)
         System.out.println("\nAdding user:1004");
         lruCache.put("user:1004", "Alice Brown");
         printCache(lruCache);
-        
+        /*
+            Current cache state (in LRU order):
+            user:1003 -> Bob Johnson
+            user:1001 -> John Smith
+            user:1004 -> Alice Brown
+          (user:1002 was evicted)
+        */
+
         // Check if evicted entry exists
         System.out.println("\nTrying to access user:1002");
         String evictedUser = lruCache.get("user:1002");
         System.out.println("Result: " + (evictedUser != null ? evictedUser : "Not in cache"));
+        /*
+            Output:
+              Trying to access user:1002
+              Result: Not in cache
+        */
     }
     
     private static void printCache(LinkedHashMap<String, String> cache) {
