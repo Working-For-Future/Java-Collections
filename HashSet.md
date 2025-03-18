@@ -213,3 +213,64 @@ public class CustomObjectHashSet {
 - Load Factor: Default is 0.75, lower values decrease collisions but increase space usage
 - equals() and hashCode(): Must be properly implemented for custom objects
 - Time Complexity: add(), remove(), contains() operations are O(1) on average
+
+## 11. Navigable Set Operations (TreeSet)
+
+**Note:** HashSet doesn't maintain order and doesn't provide these operations directly. To use ordered set operations, convert your HashSet to a TreeSet:
+
+```java
+HashSet<Integer> hashSet = new HashSet<>(Arrays.asList(5, 2, 8, 1, 9, 3));
+TreeSet<Integer> treeSet = new TreeSet<>(hashSet);
+
+// Get first element
+Integer first = treeSet.first();  // Returns 1
+
+// Get last element
+Integer last = treeSet.last();    // Returns 9
+
+// Get higher element (strictly greater)
+Integer higher = treeSet.higher(5);  // Returns 8
+
+// Get lower element (strictly less)
+Integer lower = treeSet.lower(5);    // Returns 3
+
+// Get ceiling (greater than or equal to)
+Integer ceiling = treeSet.ceiling(4);  // Returns 5
+
+// Get floor (less than or equal to)
+Integer floor = treeSet.floor(4);      // Returns 3
+
+// Poll first element (retrieve and remove)
+Integer firstElement = treeSet.pollFirst();  // Returns 1 and removes it
+
+// Poll last element (retrieve and remove)
+Integer lastElement = treeSet.pollLast();    // Returns 9 and removes it
+
+// Get subset
+NavigableSet<Integer> subset = treeSet.subSet(3, true, 8, true);  // [3, 5, 8]
+
+// Get head set (less than)
+NavigableSet<Integer> headSet = treeSet.headSet(5, false);  // [1, 2, 3]
+
+// Get tail set (greater than or equal)
+NavigableSet<Integer> tailSet = treeSet.tailSet(5, true);   // [5, 8, 9]
+
+// Get descending set
+NavigableSet<Integer> descSet = treeSet.descendingSet();    // [9, 8, 5, 3, 2, 1]
+```
+
+## 12. Using LinkedHashSet for Predictable Iteration Order
+
+```java
+// LinkedHashSet maintains insertion order
+LinkedHashSet<String> linkedSet = new LinkedHashSet<>();
+linkedSet.add("C");
+linkedSet.add("A");
+linkedSet.add("B");
+
+System.out.println(linkedSet);  // Prints: [C, A, B]
+
+// Convert HashSet to LinkedHashSet to preserve original encounter order
+HashSet<String> hashSet = new HashSet<>(Arrays.asList("X", "Y", "Z"));
+LinkedHashSet<String> orderedSet = new LinkedHashSet<>(hashSet);
+```
