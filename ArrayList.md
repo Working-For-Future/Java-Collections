@@ -15,6 +15,15 @@ List<String> fruits = new ArrayList<>(Arrays.asList("Apple", "Banana", "Orange")
 List<List<Integer>> matrix = new ArrayList<>();
 matrix.add(new ArrayList<>(Arrays.asList(1, 2, 3)));
 matrix.add(new ArrayList<>(Arrays.asList(4, 5, 6)));
+
+// Initialize a list of lists with specific size
+int n = 10;
+List<List<Integer>> list = new ArrayList<>(n + 1);
+// This only initializes the capacity to n + 1, but will resize once filled
+// You still need to initialize each inner list separately
+for(int i = 0; i <= n; i++) {
+    list.add(new ArrayList<>());
+}
 ```
 
 #### Basic Operations
