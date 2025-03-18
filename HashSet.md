@@ -168,6 +168,15 @@ public class DuplicateRemover {
 ## 9. Custom Objects in HashSet
 
 ```java
+
+# The superclass of the Person class is java.lang.Object. By default, every class in Java extends Object if no other superclass is specified.
+# Objects is a utility class provided by Java in the java.util package.
+# It was introduced in Java 7 to offer a collection of helpful static methods that aid in working with objects.
+# For example : 
+# Objects.equals(a, b) safely compares two objects, handling nulls.
+# Objects.hash(a, b, ...) computes a hash code for multiple fields.
+
+
 class Person {
     private String name;
     private int age;
@@ -177,6 +186,10 @@ class Person {
         this.age = age;
     }
 
+# The @Override annotation indicates that the method is meant to override a method declared in a superclass or interface.
+# The @Override annotation tells the compiler "I'm overriding a method from the parent class."
+# It's not required, but it helps catch errors if you accidentally write a wrong method signature, and it lets readers know that you're intentionally replacing a parent method.
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -185,6 +198,9 @@ class Person {
         return age == person.age && Objects.equals(name, person.name);
     }
 
+# There’s no strict rule on the exact order of arguments, but it’s standard to include them in the same sequence that you compare them in equals (or simply in the order they’re declared).
+# The key point is to use all fields that appear in equals and keep that set consistent.
+# If you change the order, you get a different hash value—which is fine as long as it’s consistent with your code—but you must still include the same fields, so equals and hashCode remain in sync.
     @Override
     public int hashCode() {
         return Objects.hash(name, age);
