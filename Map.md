@@ -703,7 +703,12 @@ public class InventoryReport {
         
         int totalItems = 0;
         System.out.println("INVENTORY REPORT");
+        // Output:
+        // INVENTORY REPORT
+        
         System.out.println("----------------");
+        // Output:
+        // ----------------
         
         // Iterate using entrySet for efficient access to both keys and values
         for (Map.Entry<String, Integer> entry : inventory.entrySet()) {
@@ -711,11 +716,23 @@ public class InventoryReport {
             Integer quantity = entry.getValue();
             
             System.out.println(product + ": " + quantity + " units");
+            /*
+               Possible outputs (order may vary):
+                 Laptop: 45 units
+                 Smartphone: 125 units
+                 Tablet: 35 units
+                 Headphones: 80 units
+            */
             totalItems += quantity;
         }
         
         System.out.println("----------------");
+        // Output:
+        // ----------------
+        
         System.out.println("Total items: " + totalItems);
+        // Output (sum of all units):
+        // Total items: 285
     }
 }
 ```
@@ -744,13 +761,25 @@ public class StudentScores {
         
         // Process student results using keySet iteration
         System.out.println("STUDENT RESULTS");
+        // Output:
+        // STUDENT RESULTS
+        
         System.out.println("---------------");
+        // Output:
+        // ---------------
         
         for (String student : studentScores.keySet()) {
             Double score = studentScores.get(student);
             String result = score >= passingScore ? "PASS" : "FAIL";
             
             System.out.println(student + ": " + score + " - " + result);
+            /*
+               Possible output lines (depends on ordering, as HashMap is not ordered):
+               Alice: 92.5 - PASS
+               Bob: 84.0 - PASS
+               Charlie: 76.8 - FAIL
+               Diana: 95.2 - PASS
+            */
         }
     }
 }
@@ -793,11 +822,24 @@ public class SalesStatistics {
         
         // Print results
         System.out.println("SALES STATISTICS");
+        // Output:
+        // SALES STATISTICS
+        
         System.out.println("----------------");
+        // Output:
+        // ----------------
+        
         System.out.printf("Total Sales: $%.2f\n", total);
+        // Possible output: Total Sales: $234,620.50 (actual depends on your data)
+        
         System.out.printf("Average Monthly Sales: $%.2f\n", average);
+        // Possible output: Average Monthly Sales: $46,924.10
+        
         System.out.printf("Highest Month: $%.2f\n", max);
+        // Possible output: Highest Month: $56,789.10
+        
         System.out.printf("Lowest Month: $%.2f\n", min);
+        // Possible output: Lowest Month: $38,752.75
     }
 }
 ```
@@ -822,7 +864,10 @@ public class TaskManager {
         tasks.put("TASK-5", "Prepare demo for client");
         
         System.out.println("TASK LIST");
+        // Output: TASK LIST
+        
         System.out.println("---------");
+        // Output: ---------
         
         // Process tasks using forEach with a lambda
         tasks.forEach((id, description) -> {
@@ -830,10 +875,33 @@ public class TaskManager {
             System.out.println("Description: " + description);
             System.out.println("---------");
         });
+        /*
+         Output (order may vary):
+         ID: TASK-1
+         Description: Complete project proposal
+         ---------
+         ID: TASK-2
+         Description: Review code changes
+         ---------
+         ID: TASK-3
+         Description: Fix login bug
+         ---------
+         ID: TASK-4
+         Description: Update documentation
+         ---------
+         ID: TASK-5
+         Description: Prepare demo for client
+         ---------
+        */
         
         // More complex example with filter
         System.out.println("\nBUG FIX TASKS ONLY");
+        // Output:
+        // BUG FIX TASKS ONLY
+        
         System.out.println("---------");
+        // Output:
+        // ---------
         
         tasks.forEach((id, description) -> {
             if (description.toLowerCase().contains("bug") || 
@@ -841,6 +909,10 @@ public class TaskManager {
                 System.out.println(id + ": " + description);
             }
         });
+        /*
+         Output:
+         TASK-3: Fix login bug
+        */
     }
 }
 ```
@@ -874,6 +946,8 @@ public class ExpiredProductRemoval {
         products.put("Chicken", 2);
         
         System.out.println("Initial inventory: " + products);
+        // Output (order may vary):
+        // Initial inventory: {Apples=1, Milk=3, Yogurt=7, Bread=5, Chicken=2, Cheese=2}
         
         // Define expiration threshold
         int expirationThreshold = 3; // days
@@ -881,6 +955,8 @@ public class ExpiredProductRemoval {
         // Remove products that will expire soon using iterator
         Iterator<Map.Entry<String, Integer>> iterator = products.entrySet().iterator();
         System.out.println("\nRemoving products expiring in less than " + expirationThreshold + " days...");
+        // Output:
+        // Removing products expiring in less than 3 days...
         
         while (iterator.hasNext()) {
             Map.Entry<String, Integer> entry = iterator.next();
@@ -889,11 +965,19 @@ public class ExpiredProductRemoval {
             
             if (daysLeft < expirationThreshold) {
                 System.out.println("Removing " + product + " (expires in " + daysLeft + " days)");
+                /*
+                 Possible output lines (order may vary):
+                 Removing Apples (expires in 1 days)
+                 Removing Cheese (expires in 2 days)
+                 Removing Chicken (expires in 2 days)
+                */
                 iterator.remove();
             }
         }
         
         System.out.println("\nUpdated inventory: " + products);
+        // Output (order may vary):
+        // Updated inventory: {Milk=3, Yogurt=7, Bread=5}
     }
 }
 ```
@@ -932,7 +1016,15 @@ public class PageViewCounter {
         }
         
         System.out.println("Page view counts:");
-        pageViews.forEach((page, count) -> 
+        /*
+         Possible output (order may vary):
+           Page view counts:
+           /contact: 1 views
+           /about: 2 views
+           /home: 3 views
+           /products: 3 views
+        */
+        pageViews.forEach((page, count) ->
             System.out.println(page + ": " + count + " views"));
         
         // Add default values for pages with no views
@@ -947,7 +1039,17 @@ public class PageViewCounter {
         pageViews.computeIfPresent("/login", (k, v) -> v + 1);
         
         System.out.println("\nComplete page view report:");
-        pageViews.forEach((page, count) -> 
+        /*
+         Possible output (order may vary):
+           Complete page view report:
+           /contact: 1 views
+           /register: 0 views
+           /about: 2 views
+           /login: 0 views
+           /home: 3 views
+           /products: 3 views
+        */
+        pageViews.forEach((page, count) ->
             System.out.println(page + ": " + count + " views"));
     }
 }
@@ -975,23 +1077,29 @@ public class ShoppingCartMerge {
         sessionCart.put("Notebook", 1);
         
         System.out.println("Saved cart: " + savedCart);
+        // Output (order may vary): Saved cart: {Book=1, Pen=3}
+        
         System.out.println("Session cart: " + sessionCart);
+        // Output (order may vary): Session cart: {Book=2, Notebook=1}
         
         // Merge carts when user logs in
         sessionCart.forEach((product, quantity) -> 
             savedCart.merge(product, quantity, (oldQty, newQty) -> oldQty + newQty));
         
         System.out.println("\nMerged cart: " + savedCart);
+        // Output (order may vary): Merged cart: {Book=3, Pen=3, Notebook=1}
         
         // Add another product with merge
         savedCart.merge("Pencil", 5, (oldQty, newQty) -> oldQty + newQty);
         
         System.out.println("After adding pencils: " + savedCart);
+        // Output (order may vary): After adding pencils: {Book=3, Pencil=5, Pen=3, Notebook=1}
         
         // Remove product by merging with null remapping function
         savedCart.merge("Pen", 0, (oldQty, newQty) -> null);
         
         System.out.println("After removing pens: " + savedCart);
+        // Output (order may vary): After removing pens: {Book=3, Pencil=5, Notebook=1}
     }
 }
 ```
