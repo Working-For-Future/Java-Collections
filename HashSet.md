@@ -279,7 +279,62 @@ NavigableSet<Integer> tailSet = treeSet.tailSet(5, true);   // [5, 8, 9]
 NavigableSet<Integer> descSet = treeSet.descendingSet();    // [9, 8, 5, 3, 2, 1]
 ```
 
-## 12. Using LinkedHashSet for Predictable Iteration Order
+## 12 . Using Java TreeSet With a Custom Comparator for Pairs
+```java
+
+class Pair 
+{
+    int numa;
+    int numb;
+    
+    public Pair(int a, int b)
+    {
+        this.numa = a;
+        this.numb = b;
+    }
+    
+    public int getNuma()
+    {
+        return numa;
+    }
+    
+    public int getNumb()
+    {
+        return numb;
+    }
+}
+
+public class Main
+{
+	public static void main(String[] args) {
+
+# If you didn't provide custome comparator here, you will get an error
+
+        TreeSet<Pair> set = new TreeSet<>((p1,p2) -> 
+        {
+            if(p1.getNuma() == p2.getNuma())
+            {
+                return Integer.compare(p1.getNumb(), p2.getNumb());
+            }
+            
+            return Integer.compare(p1.getNuma(), p2.getNuma());
+        });
+        
+        for(int i = 1; i <= 10; i++)
+        {
+            set.add(new Pair(i,i+10));
+        }
+        
+        for(Pair p : set)
+        {
+            System.out.println("Numa = "+ p.getNuma() + " Numb = "+ p.getNumb());
+        }
+        
+	}
+}
+```
+
+## 13. Using LinkedHashSet for Predictable Iteration Order
 
 ```java
 // LinkedHashSet maintains insertion order
