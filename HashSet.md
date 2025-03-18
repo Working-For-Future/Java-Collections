@@ -130,6 +130,10 @@ for (String lang : languages) {
 
 // Using iterator
 Iterator<String> iterator = languages.iterator();
+
+//The key thing to understand is that hasNext() checks if there's another element available before you call next(). 
+//It doesn't mean "has next after the current one" - it means "has a next element to retrieve."
+
 while (iterator.hasNext()) {
     String lang = iterator.next();
     System.out.println(lang);
